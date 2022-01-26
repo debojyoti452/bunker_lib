@@ -1,3 +1,16 @@
+targets:
+  $default:
+    builders:
+      bunker|bunker_annotation:
+        enabled: true
+
 builders:
   bunker:
-    import: "package:bunker/builder"
+    target: ":bunker"
+    import: "package:bunker/bunker.dart"
+    build_extensions: { ".dart": [ ".bunker.dart" ] }
+    builder_factories: [ "bunkerBuilder" ]
+    auto_apply: dependents
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
+    runs_before: [ "json_serializable|json_serializable" ]
