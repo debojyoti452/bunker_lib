@@ -1,6 +1,6 @@
-name: bunker_lib
-description: A new Flutter package project.
-version: 0.0.1
+name: bunker
+description: A Swing Technologies Product.
+version: 0.0.2
 homepage: https://github.com/debojyoti452/bunker_lib
 
 environment:
@@ -11,10 +11,22 @@ dependencies:
   flutter:
     sdk: flutter
 
+  analyzer: ^3.2.0
+  build: ^2.2.1
+  build_config: ^1.0.0
+  source_gen: ^1.2.1
+  meta: ^1.7.0
+  collection: ^1.15.0
+
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
+  test: ^1.20.1
+  json_serializable: ^6.1.4
+  json_annotation: ^4.4.0
+  build_test: ^2.1.5
+  build_runner: ^2.1.7
+  matcher: ^0.12.11
+  source_gen_test: ^1.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

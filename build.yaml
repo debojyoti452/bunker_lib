@@ -1,0 +1,3 @@
+builders:
+  bunker:
+    import: "package:bunker/builder"
