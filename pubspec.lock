@@ -102,9 +102,9 @@ packages:
   bunker_annotation:
     dependency: "direct main"
     description:
-      path: "../bunker_annotation"
-      relative: true
-    source: path
+      name: bunker_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   characters:
     dependency: transitive
@@ -266,14 +266,14 @@ packages:
     source: hosted
     version: "0.6.3"
   json_annotation:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.4.0"
   json_serializable:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: json_serializable
       url: "https://pub.dartlang.org"
