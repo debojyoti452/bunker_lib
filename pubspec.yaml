@@ -1,6 +1,6 @@
 name: bunker_lib
 description: A Swing Technologies Product.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/debojyoti452/bunker_lib
 
 environment:
@@ -19,7 +19,7 @@ dependencies:
   collection: ^1.15.0
   json_serializable: ^6.1.4
   json_annotation: ^4.4.0
-  bunker_annotation: ^0.0.1
+  bunker_annotation:
 
 dev_dependencies:
   flutter_lints: ^1.0.4

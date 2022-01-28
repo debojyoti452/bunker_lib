@@ -1,13 +1,13 @@
 targets:
   $default:
     builders:
-      bunker|bunker_annotation:
+      bunker_lib|bunker_annotation:
         enabled: true
 
 builders:
   bunker:
-    target: ":bunker"
-    import: "package:bunker/bunker.dart"
+    target: ":bunker_lib"
+    import: "package:bunker_lib/bunker.dart"
     build_extensions: { ".dart": [ ".bunker.dart" ] }
     builder_factories: [ "bunkerBuilder" ]
     auto_apply: dependents

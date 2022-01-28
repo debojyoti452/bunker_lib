@@ -102,9 +102,9 @@ packages:
   bunker_annotation:
     dependency: "direct main"
     description:
-      name: bunker_annotation
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../bunker_annotation"
+      relative: true
+    source: path
     version: "0.0.1"
   characters:
     dependency: transitive
