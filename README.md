@@ -1,4 +1,9 @@
-Welcome to [Bunker], yet another code generator for unions/pattern-matching/copy.
+Welcome to [Bunker].
+
+[![Pub Version](https://img.shields.io/pub/v/bunker_lib?style=for-the-badge)](https://pub.dev/packages/bunker_lib)
+[![GitHub issues](https://img.shields.io/github/issues/debojyoti452/bunker_lib?style=for-the-badge)](https://github.com/debojyoti452/bunker_lib/issues)
+[![GitHub stars](https://img.shields.io/github/stars/debojyoti452/bunker_lib?style=for-the-badge)](https://github.com/debojyoti452/bunker_lib/stargazers)
+[![GitHub license](https://img.shields.io/github/license/debojyoti452/bunker_lib?style=for-the-badge)](https://github.com/debojyoti452/bunker_lib/blob/main/LICENSE)
 
 # 1.0.5 and null-safety
 
