@@ -3,11 +3,18 @@ targets:
     builders:
       bunker_lib:
         enabled: true
+        generate_for:
+          exclude:
+            - test
+            - example
+          include:
+            - test/integration/*
+            - test/integration/**/*
 
 builders:
   bunker:
     target: ":bunker_lib"
-    import: "package:bunker_lib/bunker.dart"
+    import: "package:bunker_lib/bunker_lib.dart"
     build_extensions: { ".dart": [ ".bunker.dart" ] }
     builder_factories: [ "bunkerBuilder" ]
     auto_apply: dependents
