@@ -10,9 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
-
-dev_dependencies:
   analyzer: ^3.2.0
   build: ^2.2.1
   build_config: ^1.0.0
@@ -20,6 +17,8 @@ dev_dependencies:
   meta: ^1.7.0
   collection: ^1.15.0
   bunker_annotation: ^0.0.1
+
+dev_dependencies:
   json_serializable: ^6.1.4
   json_annotation: ^4.4.0
   test: ^1.20.1
