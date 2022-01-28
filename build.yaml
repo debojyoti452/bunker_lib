@@ -12,8 +12,7 @@ targets:
             - test/integration/**/*
 
 builders:
-  bunker:
-    target: ":bunker_lib"
+  bunker_lib:
     import: "package:bunker_lib/bunker_lib.dart"
     build_extensions: { ".dart": [ ".bunker.dart" ] }
     builder_factories: [ "bunkerBuilder" ]
