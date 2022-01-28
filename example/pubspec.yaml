@@ -38,6 +38,9 @@ dependencies:
   json_serializable: ^6.1.4
 
 dev_dependencies:
+  analyzer: ^3.2.0
+  build: ^2.2.1
+  build_config: ^1.0.0
   build_runner:
   bunker_annotation: ^0.0.1
   bunker_lib:
