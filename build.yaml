@@ -1,7 +1,7 @@
 targets:
   $default:
     builders:
-      bunker_lib|bunker_annotation:
+      bunker_lib:
         enabled: true
 
 builders:
