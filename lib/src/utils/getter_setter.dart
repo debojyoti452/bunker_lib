@@ -43,7 +43,7 @@ mixin GeneratorUtilMixin implements Communicator {
 
   @override
   void generateGetterAndSetter(ModelVisitor visitor, StringBuffer classBuffer) {
-    visitor.fields.forEach((value, dynamic key) {
+    visitor.fields.forEach((String value, dynamic key) {
       final variable =
           value.startsWith('_') ? value.replaceFirst('_', '') : value;
       classBuffer.writeln(

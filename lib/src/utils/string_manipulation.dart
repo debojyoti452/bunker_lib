@@ -6,9 +6,9 @@ class StringManipulation {
   late String originalText;
   late List<String> _words;
 
-  StringManipulation(String text) {
-    originalText = text;
-    _words = _groupIntoWords(text);
+  StringManipulation(String? text) {
+    originalText = text ?? '';
+    _words = _groupIntoWords(text ?? '');
   }
 
   List<String> _groupIntoWords(String text) {

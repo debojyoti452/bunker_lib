@@ -13,7 +13,7 @@ class ModelVisitor extends SimpleElementVisitor<void> {
 
   @override
   void visitFieldElement(FieldElement element) {
-    final elementType = element.type.toString();
+    final elementType = element.type.getDisplayString(withNullability: true);
     fields[element.name] = elementType.replaceFirst('*', '');
   }
 }

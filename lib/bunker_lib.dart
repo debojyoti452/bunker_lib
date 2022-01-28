@@ -1,13 +1,12 @@
 library bunker;
 
 import 'package:build/build.dart';
-import 'package:bunker_lib/src/builder/extension_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'src/builder/bunker_generator.dart';
 
-Builder generateExtension(BuilderOptions options) =>
-    SharedPartBuilder([ExtensionGenerator()], 'extension_generator');
+// Builder generateExtension(BuilderOptions options) =>
+//     SharedPartBuilder([ExtensionGenerator()], 'extension_generator');
 
 // Builder bunker(BuilderOptions options) =>
 //     SharedPartBuilder([BunkerGenerator()], 'bunker');
