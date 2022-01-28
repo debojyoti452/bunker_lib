@@ -1,6 +1,8 @@
 Welcome to [Bunker], yet another code generator for unions/pattern-matching/copy.
 
-# 1.0.1 and null-safety
+# 1.0.5 and null-safety
+
+[![pub package](https://img.shields.io/pub/v/sentry.svg)](https://pub.dev/packages/sentry)
 
 **Important note**:
 
@@ -9,7 +11,7 @@ dependencies:
   bunker_annotation: ^0.0.3
 
 dev_dependencies:
-  bunker_lib: ^1.0.1
+  bunker_lib: ^1.0.5
 ```
 
 ## Run the generator

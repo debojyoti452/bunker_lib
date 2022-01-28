@@ -1,6 +1,6 @@
 name: bunker_lib
 description: A Library for lessen boilerplate code. Inpsired from freezed and lombok.
-version: 1.0.3
+version: 1.0.5
 homepage: https://github.com/debojyoti452/bunker_lib
 
 environment:
