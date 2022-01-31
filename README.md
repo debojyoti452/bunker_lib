@@ -7,8 +7,6 @@ Welcome to [Bunker].
 
 # 1.0.5 and null-safety
 
-[![pub package](https://img.shields.io/pub/v/sentry.svg)](https://pub.dev/packages/sentry)
-
 **Important note**:
 
 ```yaml
