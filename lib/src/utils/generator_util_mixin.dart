@@ -1,18 +1,16 @@
 import 'package:bunker_lib/src/data/model_visitor.dart';
 import 'package:bunker_lib/src/mixin/communicator.dart';
 import 'package:bunker_lib/src/serializer/json_converter.dart';
+import 'package:bunker_lib/src/utils/parser.dart';
 import 'package:bunker_lib/src/utils/string_manipulation.dart';
 
-mixin GeneratorUtilMixin
-    implements Communicator, JsonConverter<Map<dynamic, dynamic>, Object> {
+mixin GeneratorUtilMixin implements Communicator, JsonConverter<Map<dynamic, dynamic>, Object> {
   @override
-  void generateCopyWith(
-      ModelVisitor visitor, StringBuffer classBuffer, String className) {
+  void generateCopyWith(ModelVisitor visitor, StringBuffer classBuffer, String className) {
     classBuffer.writeln('$className copyWith({');
 
     visitor.fields.forEach((value, dynamic key) {
-      final variable =
-          value.startsWith('_') ? value.replaceFirst('_', '') : value;
+      final variable = value.startsWith('_') ? value.replaceFirst('_', '') : value;
       classBuffer.write('$key ${variable.camelCase},');
     });
 
@@ -21,10 +19,8 @@ mixin GeneratorUtilMixin
     classBuffer.writeln('return $className(');
 
     visitor.fields.forEach((value, dynamic key) {
-      final variable =
-          value.startsWith('_') ? value.replaceFirst('_', '') : value;
-      classBuffer.writeln(
-          '${value.camelCase} : ${variable.camelCase} ?? \$this.${variable.camelCase},');
+      final variable = value.startsWith('_') ? value.replaceFirst('_', '') : value;
+      classBuffer.writeln('${value.camelCase} : ${variable.camelCase} ?? \$this.${variable.camelCase},');
     });
 
     classBuffer.writeln(');');
@@ -45,28 +41,17 @@ mixin GeneratorUtilMixin
 
   @override
   void generateGetterAndSetter(ModelVisitor visitor, StringBuffer classBuffer) {
-    visitor.fields.forEach((String value, dynamic key) {
-      final variable =
-          value.startsWith('_') ? value.replaceFirst('_', '') : value;
-      classBuffer.writeln(
-          "$key get get${variable.pascalCase} => _variables['$variable'];");
-      classBuffer.writeln('set set${variable.pascalCase}($key $variable) {');
-      classBuffer.writeln('super.$variable = $variable;');
-      classBuffer.writeln("_variables['$variable'] = $variable;");
-      classBuffer.writeln('}');
-    });
+    Parser.setter(visitor.fields, classBuffer, type: RenameFieldEnum.defaultType);
   }
 
   @override
   Map fromJson(Object json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
+    return <dynamic, dynamic>{};
   }
 
   @override
   Object toJson(Map object) {
-    // TODO: implement toJson
-    throw UnimplementedError();
+    return Object();
   }
 
 /*void generateGettersAndSetters(

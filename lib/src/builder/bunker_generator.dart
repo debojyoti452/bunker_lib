@@ -5,8 +5,7 @@ import 'package:bunker_lib/src/data/model_visitor.dart';
 import 'package:bunker_lib/src/utils/generator_util_mixin.dart';
 import 'package:source_gen/source_gen.dart';
 
-class BunkerGenerator extends GeneratorForAnnotation<BunkerAnnotation>
-    with GeneratorUtilMixin {
+class BunkerGenerator extends GeneratorForAnnotation<BunkerAnnotation> with GeneratorUtilMixin {
   @override
   String generateForAnnotatedElement(
     Element element,
@@ -22,19 +21,14 @@ class BunkerGenerator extends GeneratorForAnnotation<BunkerAnnotation>
     final _className = '${visitor.className}';
     final _classBuffer = StringBuffer();
 
-    if (_isJsonSerializer(isJsonSerializer ?? false) == true) {
-      _classBuffer.writeln('@JsonSerializable()');
-    }
-    _classBuffer
-        .writeln('class $_className extends _\$${visitor.className}Bunker {');
+    _classBuffer.writeln('class $_className extends _\$${visitor.className}Bunker {');
 
     _classBuffer.writeln('Map<String, dynamic> _variables = {};');
 
     _classBuffer.writeln('$_className() {');
 
     visitor.fields.forEach((value, dynamic key) {
-      final variable =
-          value.startsWith('_') ? value.replaceFirst('_', '') : value;
+      final variable = value.startsWith('_') ? value.replaceFirst('_', '') : value;
       _classBuffer.write('$variable = super.$variable;');
     });
 
@@ -43,6 +37,11 @@ class BunkerGenerator extends GeneratorForAnnotation<BunkerAnnotation>
     generateGetterAndSetter(visitor, _classBuffer);
 
     generateCopyWith(visitor, _classBuffer, '${visitor.className}');
+
+    if (_isJsonSerializer(isJsonSerializer ?? false) == true) {
+      // toJson(object)
+      // fromJson(json);
+    }
 
     _classBuffer.writeln('}');
 

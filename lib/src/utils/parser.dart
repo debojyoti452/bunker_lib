@@ -5,30 +5,36 @@ import 'package:bunker_lib/src/utils/string_manipulation.dart';
 enum RenameFieldEnum { defaultType, header, snake, pascal }
 
 mixin Parser {
-  static String setter(String variable, dynamic key, StringBuffer classBuffer,
+  static void setter(Map<String, dynamic> fields, StringBuffer classBuffer,
       {RenameFieldEnum type = RenameFieldEnum.defaultType}) {
-    var parsedVar = getType(type, source: variable);
+    try {
+      fields.forEach((String value, dynamic key) {
+        final variable = value.startsWith('_') ? value.replaceFirst('_', '') : value;
 
-    visitor.fields.forEach((String value, dynamic key) {
-      final variable =
-          value.startsWith('_') ? value.replaceFirst('_', '') : value;
-      classBuffer.writeln(
-          "$key get get${variable.pascalCase} => _variables['$variable'];");
-      classBuffer.writeln('set set${variable.pascalCase}($key $variable) {');
-      classBuffer.writeln('super.$variable = $variable;');
-      classBuffer.writeln("_variables['$variable'] = $variable;");
-      classBuffer.writeln('}');
-    });
+        var parsedVar = _getType(type, source: variable);
 
-    throw CustomException(ExceptionMessage.setterError);
+        classBuffer.writeln("$key get get$parsedVar => _variables['$variable'];");
+        classBuffer.writeln('set set$parsedVar($key $variable) {');
+        classBuffer.writeln('super.$variable = $variable;');
+        classBuffer.writeln("_variables['$variable'] = $variable;");
+        classBuffer.writeln('}');
+      });
+    } catch (e) {
+      throw CustomException(ExceptionMessage.setterError);
+    }
   }
 
-  static String getType(RenameFieldEnum type, {required String source}) {
+  static void toJson() {}
+
+  static void fromJson() {}
+
+  static String _getType(RenameFieldEnum type, {required String source}) {
     String style = 'default';
     String result = '';
 
     switch (type) {
       case RenameFieldEnum.defaultType:
+        result = source.pascalCase;
         style = 'default';
         break;
       case RenameFieldEnum.header:
