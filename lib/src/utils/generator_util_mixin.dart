@@ -1,8 +1,10 @@
-import 'package:bunker_lib/src/data/mixin/communicator.dart';
 import 'package:bunker_lib/src/data/model_visitor.dart';
+import 'package:bunker_lib/src/mixin/communicator.dart';
+import 'package:bunker_lib/src/serializer/json_converter.dart';
 import 'package:bunker_lib/src/utils/string_manipulation.dart';
 
-mixin GeneratorUtilMixin implements Communicator {
+mixin GeneratorUtilMixin
+    implements Communicator, JsonConverter<Map<dynamic, dynamic>, Object> {
   @override
   void generateCopyWith(
       ModelVisitor visitor, StringBuffer classBuffer, String className) {
@@ -53,6 +55,18 @@ mixin GeneratorUtilMixin implements Communicator {
       classBuffer.writeln("_variables['$variable'] = $variable;");
       classBuffer.writeln('}');
     });
+  }
+
+  @override
+  Map fromJson(Object json) {
+    // TODO: implement fromJson
+    throw UnimplementedError();
+  }
+
+  @override
+  Object toJson(Map object) {
+    // TODO: implement toJson
+    throw UnimplementedError();
   }
 
 /*void generateGettersAndSetters(
