@@ -1,53 +1,54 @@
+import 'package:bunker_lib/src/constants/constants.dart';
+import 'package:bunker_lib/src/constants/enums.dart';
 import 'package:bunker_lib/src/constants/exception_message.dart';
 import 'package:bunker_lib/src/exception/custom_exception.dart';
 import 'package:bunker_lib/src/utils/string_manipulation.dart';
-
-enum RenameFieldEnum { defaultType, header, snake, pascal }
 
 mixin Parser {
   static void setter(Map<String, dynamic> fields, StringBuffer classBuffer,
       {RenameFieldEnum type = RenameFieldEnum.defaultType}) {
     try {
       fields.forEach((String value, dynamic key) {
-        final variable = value.startsWith('_') ? value.replaceFirst('_', '') : value;
+        final variable = value.removeUnderScore;
 
         var parsedVar = _getType(type, source: variable);
 
-        classBuffer.writeln("$key get get$parsedVar => _variables['$variable'];");
-        classBuffer.writeln('set set$parsedVar($key $variable) {');
-        classBuffer.writeln('super.$variable = $variable;');
+        classBuffer.writeln("$key ${Constants.getterMark} get$parsedVar => _variables['$variable'];");
+        classBuffer.writeln('${Constants.setterMark} set$parsedVar($key $variable) {');
+        classBuffer.writeln('${Constants.superMark}.$variable = $variable;');
         classBuffer.writeln("_variables['$variable'] = $variable;");
-        classBuffer.writeln('}');
+        classBuffer.writeln(Constants.closeFirstBracket);
       });
     } catch (e) {
       throw CustomException(ExceptionMessage.setterError);
     }
   }
 
-  static void toJson() {}
+  static Map<String, dynamic> toJson() {
+    var jsonMap = <String, dynamic>{};
+    return jsonMap;
+  }
 
-  static void fromJson() {}
+  static void fromJson(Map<String, dynamic> fields) {}
 
   static String _getType(RenameFieldEnum type, {required String source}) {
-    String style = 'default';
     String result = '';
 
     switch (type) {
       case RenameFieldEnum.defaultType:
         result = source.pascalCase;
-        style = 'default';
         break;
       case RenameFieldEnum.header:
         result = source.headerCase;
-        style = 'kebab';
         break;
       case RenameFieldEnum.snake:
         result = source.snakeCase;
-        style = 'snake';
         break;
       case RenameFieldEnum.pascal:
         result = source.pascalCase;
-        style = 'pascal';
+        break;
+      case RenameFieldEnum.camelcase:
+        result = source.camelCase;
         break;
     }
 

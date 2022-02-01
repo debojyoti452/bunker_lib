@@ -1,42 +1,30 @@
+import 'package:bunker_lib/src/constants/constants.dart';
+import 'package:bunker_lib/src/constants/enums.dart';
 import 'package:bunker_lib/src/data/model_visitor.dart';
 import 'package:bunker_lib/src/mixin/communicator.dart';
-import 'package:bunker_lib/src/serializer/json_converter.dart';
 import 'package:bunker_lib/src/utils/parser.dart';
 import 'package:bunker_lib/src/utils/string_manipulation.dart';
 
-mixin GeneratorUtilMixin implements Communicator, JsonConverter<Map<dynamic, dynamic>, Object> {
+mixin GeneratorUtilMixin implements Communicator {
   @override
   void generateCopyWith(ModelVisitor visitor, StringBuffer classBuffer, String className) {
-    classBuffer.writeln('$className copyWith({');
+    classBuffer.writeln('$className ${Constants.copyWithOpening}');
 
     visitor.fields.forEach((value, dynamic key) {
-      final variable = value.startsWith('_') ? value.replaceFirst('_', '') : value;
+      final variable = value.removeUnderScore;
       classBuffer.write('$key ${variable.camelCase},');
     });
 
-    classBuffer.writeln('}) {');
-
-    classBuffer.writeln('return $className(');
+    classBuffer.writeln('${Constants.closeFirstBracket}${Constants.closeRoundedBracket} ${Constants.openFirstBracket}');
+    classBuffer.writeln('${Constants.returnMark} $className${Constants.openRoundedBracket}');
 
     visitor.fields.forEach((value, dynamic key) {
-      final variable = value.startsWith('_') ? value.replaceFirst('_', '') : value;
+      final variable = value.removeUnderScore;
       classBuffer.writeln('${value.camelCase} : ${variable.camelCase} ?? \$this.${variable.camelCase},');
     });
 
-    classBuffer.writeln(');');
-
-    /*for (final field in visitor.fields.keys) {
-      //ignore:cascade_invocations
-      classBuffer.writeln('${visitor.fields[field]} ${variable.camelCase}}), ');
-    }*/
-
-    classBuffer.writeln('}');
-
-    //Eg: ClassName copyWith(variable) {
-    //    return ClassName(
-    //      variable: variable ?? this.variable,
-    //    );
-    // }
+    classBuffer.writeln('${Constants.closeRoundedBracket}${Constants.semiColonMark}');
+    classBuffer.writeln(Constants.closeFirstBracket);
   }
 
   @override
@@ -45,43 +33,12 @@ mixin GeneratorUtilMixin implements Communicator, JsonConverter<Map<dynamic, dyn
   }
 
   @override
-  Map fromJson(Object json) {
-    return <dynamic, dynamic>{};
+  Object fromJson(Map<String, dynamic> map) {
+    throw UnimplementedError();
   }
 
   @override
-  Object toJson(Map object) {
-    return Object();
+  Map<String, dynamic> toJson(Object data) {
+    throw UnimplementedError();
   }
-
-/*void generateGettersAndSetters(
-    ModelVisitor visitor,
-    StringBuffer classBuffer,
-  ) {
-
-
-    // for (final field in visitor.fields.keys) {
-    //   final variable =
-    //       field.startsWith('_') ? field.replaceFirst('_', '') : field;
-    //
-    //   classBuffer.writeln(
-    //       "${visitor.fields[field]} get ${variable.camelCase} => variables['$variable'];");
-    //   // EX: String get name => variables['name'];
-    //
-    //   //ignore:cascade_invocations
-    //   classBuffer.writeln(
-    //       'set ${variable.camelCase}(${visitor.fields[field]} $variable) {');
-    //   //ignore:cascade_invocations
-    //   classBuffer.writeln('super.$field = $variable;');
-    //   //ignore:cascade_invocations
-    //   classBuffer.writeln("variables['$variable'] = $variable;");
-    //   //ignore:cascade_invocations
-    //   classBuffer.writeln('}');
-    //
-    //   // EX: set name(String name) {
-    //   //       super._name = name;
-    //   //       variables['name'] = name;
-    //   //     }
-    // }
-  }*/
 }

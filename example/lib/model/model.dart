@@ -5,7 +5,7 @@ import 'sub_model.dart';
 part 'model.bunker.dart';
 // part 'model.g.dart';
 
-@BunkerAnnotation(isJsonSerializer: false)
+@BunkerAnnotation(isJsonSerializer: true)
 class Model {
   String? name_variable;
   int? age_variable;

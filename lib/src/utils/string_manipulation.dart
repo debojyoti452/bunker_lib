@@ -1,3 +1,5 @@
+import 'package:bunker_lib/src/constants/constants.dart';
+
 class StringManipulation {
   final RegExp _upperAlphaRegex = RegExp(r'[A-Z]');
 
@@ -26,9 +28,8 @@ class StringManipulation {
 
       sb.write(char);
 
-      var isEndOfWord = nextChar == null ||
-          (_upperAlphaRegex.hasMatch(nextChar) && !isAllCaps) ||
-          symbolSet.contains(nextChar);
+      var isEndOfWord =
+          nextChar == null || (_upperAlphaRegex.hasMatch(nextChar) && !isAllCaps) || symbolSet.contains(nextChar);
 
       if (isEndOfWord) {
         words.add(sb.toString());
@@ -69,6 +70,9 @@ class StringManipulation {
   /// Title Case
   String get titleCase => _getPascalCase(separator: ' ');
 
+  /// Remove UnderScore
+  String get removeUnderScore => _removeUnderScore();
+
   String _getCamelCase({String separator = ''}) {
     var words = _words.map(_upperCaseFirstLetter).toList();
     if (_words.isNotEmpty) {
@@ -108,6 +112,12 @@ class StringManipulation {
   String _upperCaseFirstLetter(String word) {
     return '${word.substring(0, 1).toUpperCase()}${word.substring(1).toLowerCase()}';
   }
+
+  String _removeUnderScore() {
+    return originalText.startsWith('$Constants.underScoreMark')
+        ? originalText.replaceFirst('$Constants.underScoreMark', '')
+        : originalText;
+  }
 }
 
 extension StringReCase on String {
@@ -130,4 +140,6 @@ extension StringReCase on String {
   String get headerCase => StringManipulation(this).headerCase;
 
   String get titleCase => StringManipulation(this).titleCase;
+
+  String get removeUnderScore => StringManipulation(this).removeUnderScore;
 }

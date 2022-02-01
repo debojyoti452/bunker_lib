@@ -3,6 +3,7 @@ import 'package:build/build.dart';
 import 'package:bunker_annotation/bunker_annotation.dart';
 import 'package:bunker_lib/src/data/model_visitor.dart';
 import 'package:bunker_lib/src/utils/generator_util_mixin.dart';
+import 'package:bunker_lib/src/utils/string_manipulation.dart';
 import 'package:source_gen/source_gen.dart';
 
 class BunkerGenerator extends GeneratorForAnnotation<BunkerAnnotation> with GeneratorUtilMixin {
@@ -28,7 +29,7 @@ class BunkerGenerator extends GeneratorForAnnotation<BunkerAnnotation> with Gene
     _classBuffer.writeln('$_className() {');
 
     visitor.fields.forEach((value, dynamic key) {
-      final variable = value.startsWith('_') ? value.replaceFirst('_', '') : value;
+      final variable = value.removeUnderScore;
       _classBuffer.write('$variable = super.$variable;');
     });
 
