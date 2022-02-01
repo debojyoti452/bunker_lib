@@ -5,7 +5,7 @@ abstract class Communicator {
 
   void generateCopyWith(ModelVisitor visitor, StringBuffer classBuffer, String className);
 
-  Map<String, dynamic> toJson(Object data);
+  Map<String, dynamic> toJson(ModelVisitor data, StringBuffer classBuffer);
 
-  Object fromJson(Map<String, dynamic> map);
+  Object fromJson(Map<String, dynamic> map, StringBuffer classBuffer);
 }

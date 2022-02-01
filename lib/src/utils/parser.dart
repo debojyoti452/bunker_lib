@@ -1,6 +1,7 @@
 import 'package:bunker_lib/src/constants/constants.dart';
 import 'package:bunker_lib/src/constants/enums.dart';
 import 'package:bunker_lib/src/constants/exception_message.dart';
+import 'package:bunker_lib/src/data/model_visitor.dart';
 import 'package:bunker_lib/src/exception/custom_exception.dart';
 import 'package:bunker_lib/src/utils/string_manipulation.dart';
 
@@ -24,12 +25,13 @@ mixin Parser {
     }
   }
 
-  static Map<String, dynamic> toJson() {
-    var jsonMap = <String, dynamic>{};
-    return jsonMap;
+  static Map<String, dynamic> toJson(ModelVisitor data, StringBuffer classBuffer) {
+    return data.dataMap;
   }
 
-  static void fromJson(Map<String, dynamic> fields) {}
+  static Object fromJson(Map<String, dynamic> fields, StringBuffer classBuffer) {
+    return Object();
+  }
 
   static String _getType(RenameFieldEnum type, {required String source}) {
     String result = '';

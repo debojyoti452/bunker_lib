@@ -10,7 +10,7 @@ mixin GeneratorUtilMixin implements Communicator {
   void generateCopyWith(ModelVisitor visitor, StringBuffer classBuffer, String className) {
     classBuffer.writeln('$className ${Constants.copyWithOpening}');
 
-    visitor.fields.forEach((value, dynamic key) {
+    visitor.dataMap.forEach((value, dynamic key) {
       final variable = value.removeUnderScore;
       classBuffer.write('$key ${variable.camelCase},');
     });
@@ -18,7 +18,7 @@ mixin GeneratorUtilMixin implements Communicator {
     classBuffer.writeln('${Constants.closeFirstBracket}${Constants.closeRoundedBracket} ${Constants.openFirstBracket}');
     classBuffer.writeln('${Constants.returnMark} $className${Constants.openRoundedBracket}');
 
-    visitor.fields.forEach((value, dynamic key) {
+    visitor.dataMap.forEach((value, dynamic key) {
       final variable = value.removeUnderScore;
       classBuffer.writeln('${value.camelCase} : ${variable.camelCase} ?? \$this.${variable.camelCase},');
     });
@@ -29,16 +29,16 @@ mixin GeneratorUtilMixin implements Communicator {
 
   @override
   void generateGetterAndSetter(ModelVisitor visitor, StringBuffer classBuffer) {
-    Parser.setter(visitor.fields, classBuffer, type: RenameFieldEnum.defaultType);
+    Parser.setter(visitor.dataMap, classBuffer, type: RenameFieldEnum.defaultType);
   }
 
   @override
-  Object fromJson(Map<String, dynamic> map) {
+  Object fromJson(Map<String, dynamic> map, StringBuffer classBuffer) {
     throw UnimplementedError();
   }
 
   @override
-  Map<String, dynamic> toJson(Object data) {
-    throw UnimplementedError();
+  Map<String, dynamic> toJson(ModelVisitor data, StringBuffer classBuffer) {
+    return Parser.toJson(data, classBuffer);
   }
 }

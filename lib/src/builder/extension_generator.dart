@@ -9,8 +9,7 @@ import 'package:source_gen/source_gen.dart';
 class ExtensionGenerator extends GeneratorForAnnotation<ExtensionAnnotation> {
   // 3
   @override
-  String generateForAnnotatedElement(
-      Element element, ConstantReader annotation, BuildStep buildStep) {
+  String generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
     // 4
     final visitor = ModelVisitor();
     element.visitChildren(visitor);
@@ -27,9 +26,8 @@ class ExtensionGenerator extends GeneratorForAnnotation<ExtensionAnnotation> {
     classBuffer.writeln('Map<String, dynamic> get variables => {');
 
     // 7
-    for (final field in visitor.fields.keys) {
-      final variable =
-          field.startsWith('_') ? field.replaceFirst('_', '') : field;
+    for (final field in visitor.dataMap.keys) {
+      final variable = field.startsWith('_') ? field.replaceFirst('_', '') : field;
 
       classBuffer.writeln("'$variable': $field,"); // EX: 'name': _name,
     }
@@ -47,22 +45,19 @@ class ExtensionGenerator extends GeneratorForAnnotation<ExtensionAnnotation> {
     return classBuffer.toString();
   }
 
-  void generateGettersAndSetters(
-      ModelVisitor visitor, StringBuffer classBuffer) {
+  void generateGettersAndSetters(ModelVisitor visitor, StringBuffer classBuffer) {
 // 1
-    for (final field in visitor.fields.keys) {
+    for (final field in visitor.dataMap.keys) {
       // 2
-      final variable =
-          field.startsWith('_') ? field.replaceFirst('_', '') : field;
+      final variable = field.startsWith('_') ? field.replaceFirst('_', '') : field;
 
       // 3 getter
-      classBuffer.writeln(
-          "${visitor.fields[field]} get $variable => variables['$variable'];");
+      classBuffer.writeln("${visitor.dataMap[field]} get $variable => variables['$variable'];");
       // EX: String get name => variables['name'];
 
       // 4 setter
       //ignore:cascade_invocations
-      classBuffer.writeln('set $variable(${visitor.fields[field]} $variable)');
+      classBuffer.writeln('set $variable(${visitor.dataMap[field]} $variable)');
       //ignore:cascade_invocations
       classBuffer.writeln('=> $field = $variable;');
       // EX: set name(String name) => _name = name;
